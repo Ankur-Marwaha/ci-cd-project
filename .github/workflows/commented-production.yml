@@ -1,0 +1,26 @@
+name: production-deployment
+
+on:
+  push:
+    # whenever a push/change happens to master
+    branches:
+      - random
+    # whenever a change happens in this path
+    path:
+      - ./
+
+defaults:
+  run:
+    # it will get us into that folder
+    working-directory: ./
+
+jobs:
+  build:
+    # these are virtual machines that are created by github
+    runs-on: ubuntu-latest
+
+    steps:
+      # this will load our code into virtual machine environment
+      - uses: 'actions/checkout@v2'
+      - run: npm install
+      - run: npm run build
