@@ -24,3 +24,14 @@ jobs:
       - uses: 'actions/checkout@v2'
       - run: npm install
       - run: npm run build
+
+      # action to install AWS cli
+      # all commands after this have access to AWS cli
+      - uses: 'shinyinc/action-aws-cli@v1.2'
+      # sync distribution directory by using s3 feature, this will sync dist directory with s3 bucket
+      # we will setup the below values inside of our repository
+      - run: aws s3 sync build s3://${{ secrets.S3_BUCKET_NAME }}/container/latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'us-east-1'
