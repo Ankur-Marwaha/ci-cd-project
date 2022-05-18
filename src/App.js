@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Basic react app....
+          Basic react app
         </p>
       </header>
     </div>
